@@ -1,0 +1,12 @@
+{
+  "name": "sistema-fatto",
+  "version": "1.0.0",
+  "description": "Desenvolvimento de um sistema de tarefas - Fatto teste",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
