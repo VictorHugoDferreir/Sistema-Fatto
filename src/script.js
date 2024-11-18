@@ -1,5 +1,5 @@
 function adicionarLinha() {
-    const tabela = document.getElementById("TabelaDeTarefas");
+    const tabela = document.getElementById("TabelaDeTarefas").getElementsByTagName('tbody')[0];
     const nome = document.getElementById("nome").value;
     const custo = document.getElementById("custo").value;
     const dataLimite = document.getElementById("dataLimite").value;
@@ -14,10 +14,10 @@ function adicionarLinha() {
         celulaNome.textContent = nome;
         celulaCusto.textContent = 'R$ ' + custo;
         celulaDataLimite.textContent = dataLimite;
-        celulaAcoes.innerHTML = '<button onclick="excluirLinha(this)">Excluir</button>';
+        celulaAcoes.innerHTML = '<button class="btn btn-danger" onclick="excluirLinha(this)">Excluir</button>';
   
         if(custo > 1000){
-            novaLinha.classList.add("amarelo"); // Adiciona            a classe para a linha ficar amarela
+            novaLinha.classList.add("table-warning"); // Adiciona            a classe para a linha ficar amarela
             }
   
   
@@ -29,6 +29,13 @@ function adicionarLinha() {
         alert("Por favor, preencha todos os campos.");
     }
   }
+  
+  function excluirLinha(button) {
+    const linha = button.parentElement.parentElement; // Pega a linha da tabela
+    linha.remove();
+  }
+  
+  
   
   function excluirLinha(button) {
     const linha = button.parentElement.parentElement; // Pega a linha da tabela
