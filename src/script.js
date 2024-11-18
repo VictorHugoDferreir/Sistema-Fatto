@@ -17,7 +17,7 @@ function adicionarLinha() {
         celulaAcoes.innerHTML = '<button class="btn btn-danger" onclick="excluirLinha(this)">Excluir</button>';
   
         if(custo > 1000){
-            novaLinha.classList.add("table-warning"); // Adiciona            a classe para a linha ficar amarela
+            novaLinha.classList.add("table-warning"); // Adiciona a classe para a linha ficar amarela
             }
   
   
@@ -31,8 +31,17 @@ function adicionarLinha() {
   }
   
   function excluirLinha(button) {
+    
+    let resposta = confirm("Você tem certeza que deseja excluir esta tarefa?");
+    
+    if(resposta){
     const linha = button.parentElement.parentElement; // Pega a linha da tabela
     linha.remove();
+    alert("Tarefa excluída!");
+    }
+      else{
+        alert("Exclusão cancelada!");
+      }
   }
   
   
