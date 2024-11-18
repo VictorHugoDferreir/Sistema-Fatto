@@ -6,17 +6,11 @@ html {
   body {
     font-family: 'Times New Roman', Times, serif;
   }
+
+  div.row {
+     margin-bottom: 0.5rem;
+  }
   
-  .TabelaDeTarefas {
-    width: 400px;
-    border-collapse: collapse;
-  }
-  .TabelaDeTarefas th, .TabelaDeTarefas td {
-    border: 1px solid black;
-    padding: 12px;
-    text-align: left;
-  }
-  div {
      margin-bottom: 15px;
   }
   .amarelo {
