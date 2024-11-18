@@ -37,9 +37,6 @@ function adicionarLinha() {
   
   
   
-  function excluirLinha(button) {
-    const linha = button.parentElement.parentElement; // Pega a linha da tabela
-    linha.remove();
-  }
+
   
   
