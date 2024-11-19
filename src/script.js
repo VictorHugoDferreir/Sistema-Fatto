@@ -33,7 +33,7 @@ function adicionarLinha(){
       }
 }
   
-  function excluirLinha(button){
+function excluirLinha(button){
     
     let resposta = confirm("Você tem certeza que deseja excluir esta tarefa?");
     
@@ -45,7 +45,47 @@ function adicionarLinha(){
       else{
         alert("Exclusão cancelada!");
       }
-  }
+}
+
+function editarLinha(button){
+  const linha = button.closest('tr'); // Pega a linha da tabela
+  const células = linha.querySelectorAll('td'); // Pega todas as células da linha
+  
+  // Verifica se está no modo de edição
+  const editando = linha.classList.contains('editando');
+  
+  if(editando){
+    // Se estiver editando, salva os valores dos inputs e atualiza as células
+    const novoNome = células[0].querySelector('input').value; // Nome
+    const novoCusto = células[1].querySelector('input').value; // Custo
+    const novaData = células[2].querySelector('input').value; // Data Limite
+
+    // Atualiza as células com os valores editados
+    células[0].textContent = novoNome;
+    células[1].textContent = 'R$ ' + novoCusto;
+    células[2].textContent = novaData;
+
+    button.textContent = 'Editar'; // Muda o texto do botão de volta para "Editar"
+    linha.classList.remove('editando'); // Remove a classe 'editando'
+
+    // Verifica se o custo é maior que 1000 para adicionar ou remover a classe 'table-warning'
+    if(parseFloat(novoCusto) > 1000){
+      linha.classList.add("table-warning"); // Adiciona a classe para a linha ficar amarela
+    } 
+      else{
+        linha.classList.remove("table-warning"); // Remove a classe para voltar à cor original
+      }
+
+  } 
+    else{
+      // Caso contrário, transforma as células em inputs para edição
+      células[0].innerHTML = `<input type="text" value="${células[0].textContent}">`; // Nome
+      células[1].innerHTML = `<input type="number" value="${células[1].textContent.replace('R$ ', '')}">`; // Custo
+      células[2].innerHTML = `<input type="date" value="${células[2].textContent}">`; // Data Limite
+      button.textContent = 'Salvar'; // Muda o texto do botão para "Salvar"
+      linha.classList.add('editando'); // Adiciona a classe 'editando'
+    }
+}
   
   
 
