@@ -16,7 +16,7 @@ function adicionarLinha(){
         celulaCusto.textContent = 'R$ ' + custo;
         celulaDataLimite.textContent = dataLimite;
         celulaAcoes.innerHTML = '<button class="btn btn-danger" onclick="excluirLinha(this)">Excluir</button>';
-        celulaEdit.innerHTML = '<button class="btn btn-primary" onclck="editarLinha(this)">Editar</button>';
+        celulaEdit.innerHTML = '<button class="btn btn-primary" onclick="editarLinha(this)">Editar</button>';
   
         if(custo > 1000){
             novaLinha.classList.add("table-warning"); // Adiciona a classe para a linha ficar amarela
