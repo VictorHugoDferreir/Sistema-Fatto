@@ -1,5 +1,3 @@
-
-
 function adicionarLinha(){
     const tabela = document.getElementById("TabelaDeTarefas").getElementsByTagName('tbody')[0];
     const nome = document.getElementById("nome").value;
