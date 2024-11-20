@@ -1,24 +1,24 @@
 import express from 'express'
-//import mongoose from 'mongoose'
+import path from 'path'
 
 const PORT = 5000;
 
+const __dirname = path.resolve();
 const app = express();
 app.use(express.json());
 
+
 const tasks = [];
 
-
-
-//mongoose.connect('mongodb://localhost:27017/meuBanco', { useNewUrlParser: true, useUnifiedTopology: true });
-
-/*const TarefaSchema = new mongoose.Schema({
-  tarefa: String,
-  custo: Number,
-  dataLimite: String,
-});*/
-
-//const Tarefa = mongoose.model('Tarefa', TarefaSchema);
+app.get("/", function(req, res){
+  res.sendFile(__dirname + "/html/index.html")
+});
+app.get("/style.css", function(req,res){
+  res.sendFile(__dirname + "/html/style.css")
+})
+app.get("/script.js", function(req,res){
+  res.sendFile(__dirname + "/html/script.js")
+})
 
 // Cadastrar uma nova tarefa
 app.post('/tarefas', (req, res) => {

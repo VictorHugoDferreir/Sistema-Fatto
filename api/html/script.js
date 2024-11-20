@@ -1,5 +1,3 @@
-import axios from 'axios'
-
 function adicionarLinha(){
     const tabela = document.getElementById("TabelaDeTarefas").getElementsByTagName('tbody')[0];
     const nome = document.getElementById("nome").value;
@@ -88,6 +86,11 @@ function editarLinha(button){
       button.textContent = 'Salvar'; //muda o texto do botão para "Salvar"
       linha.classList.add('editando'); //adiciona a classe 'editando'
     }
+}
+
+//métodos http
+aysnc function deletarPost(index){
+  
 }
   
 
