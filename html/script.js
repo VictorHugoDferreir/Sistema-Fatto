@@ -1,4 +1,4 @@
-
+import axios from 'axios'
 
 function adicionarLinha(){
     const tabela = document.getElementById("TabelaDeTarefas").getElementsByTagName('tbody')[0];
