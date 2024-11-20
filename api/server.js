@@ -1,9 +1,14 @@
 import express from 'express'
 //import mongoose from 'mongoose'
 
+const PORT = 5000;
 
 const app = express();
-const PORT = 5000;
+app.use(express.json());
+
+const tasks = [];
+
+
 
 //mongoose.connect('mongodb://localhost:27017/meuBanco', { useNewUrlParser: true, useUnifiedTopology: true });
 
@@ -15,21 +20,18 @@ const PORT = 5000;
 
 //const Tarefa = mongoose.model('Tarefa', TarefaSchema);
 
-app.use(express.json());
-
 // Cadastrar uma nova tarefa
-/*app.post('/tarefas', async (req, res) => {
-  const novaTarefa = new Tarefa(req.body);
-  await novaTarefa.save();
-  res.status(201).send(novaTarefa);
-});*/
+app.post('/tarefas', (req, res) => {
+  
+  tasks.push(req.body);
+
+  res.status(201).json(req.body);
+});
 
 // Listar todoas as tarefas
-app.get('/tarefas', async (req, res) => {
-  /*const tarefas = await Tarefa.find();
-  res.send(tarefas);*/
-  res.send('Servidor rodando');
+app.get('/tarefas', (req, res) => {
+  res.status(200).json(tasks);
 });
 
 // Iniciar o servidor
-app.listen(PORT);
+app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

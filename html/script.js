@@ -47,6 +47,7 @@ function excluirLinha(button){
         alert("Exclusão cancelada!");
       }
 }
+
 function editarLinha(button){
   const linha = button.closest('tr'); // pega a linha da tabela
   const celulas = linha.querySelectorAll('td'); // pega todas as células da linha
