@@ -14,8 +14,9 @@ datasource db {
 }
 
 model Task {
-  id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  nome  String   @unique
-  custo Float
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  nome       String
+  custo      Float
   dataLimite DateTime
 }
+
