@@ -18,6 +18,7 @@ async function adicionarLinha(){
         alert(retorno.id);
 
         const novaLinha = tabela.insertRow();
+        novaLinha.setAttribute('data-id', retorno.id);
         const celulaNome = novaLinha.insertCell(0);
         const celulaCusto = novaLinha.insertCell(1);
         const celulaDataLimite = novaLinha.insertCell(2);
@@ -46,61 +47,69 @@ async function adicionarLinha(){
         }
 }
   
-function excluirLinha(button){
-    
-    let resposta = confirm("Você tem certeza que deseja excluir esta tarefa?");
-    
-    if(resposta){
-    const linha = button.parentElement.parentElement; // pega a linha da tabela
-    deletarPost(tarefa.id);
-    linha.remove();
-    alert("Tarefa excluída!");
+function excluirLinha(button) {
+  const linha = button.parentElement.parentElement; //pega a linha da tabela
+  const id = linha.getAttribute('data-id'); //pega o ID armazenado no atributo data-id
+
+  let resposta = confirm("Você tem certeza que deseja excluir esta tarefa?");
+  if(resposta){
+    deletarPost(id).then(() => {
+      linha.remove(); // Remove a linha da tabela após exclusão no banco
+      alert("Tarefa excluída!");
+    }).catch((error) => {
+      console.error("Erro ao excluir tarefa:", error);
+      alert("Não foi possível excluir a tarefa.");
+    });
+  } 
+    else {
+      alert("Exclusão cancelada!");
     }
-      else{
-        alert("Exclusão cancelada!");
-      }
 }
 
+
 function editarLinha(button){
-  const linha = button.closest('tr'); // pega a linha da tabela
-  const celulas = linha.querySelectorAll('td'); // pega todas as células da linha
-  
-  //verifica se está no modo de edição
+  const linha = button.closest('tr');
+  const id = linha.getAttribute('data-id'); // Obtém o ID da tarefa
+  const celulas = linha.querySelectorAll('td');
   const editando = linha.classList.contains('editando');
-  
+
   if(editando){
-    //se estiver editando, salva os valores dos inputs e atualiza as células
-    tarefa.nome = celulas[0].querySelector('input').value; // Nome
-    tarefa.custo = celulas[1].querySelector('input').value; // Custo
-    tarefa.dataLimite = celulas[2].querySelector('input').value; // Data Limite
+    const tarefaEditada = {
+      nome: celulas[0].querySelector('input').value,
+      custo: celulas[1].querySelector('input').value,
+      dataLimite: celulas[2].querySelector('input').value
+    };
 
-    //atualiza as células com os valores editados
-    celulas[0].textContent = tarefa.nome;
-    celulas[1].textContent = 'R$ ' + tarefa.custo;
-    celulas[2].textContent = tarefa.dataLimite;
+    atualizarPost(tarefaEditada, id)
+      .then(() => {
+        celulas[0].textContent = tarefaEditada.nome;
+        celulas[1].textContent = 'R$ ' + tarefaEditada.custo;
+        celulas[2].textContent = tarefaEditada.dataLimite;
 
-    atualizarPost(tarefa, tarefa.id);
+        linha.classList.remove('editando');
+        button.textContent = 'Editar';
 
-    button.textContent = 'Editar'; //muda o texto do botão de volta para "Editar"
-    linha.classList.remove('editando'); // Remove a classe 'editando'
-
-    //verifica se o custo é maior que 1000 para adicionar ou remover a classe 'table-warning'
-    if(parseFloat(tarefa.custo) > 1000){
-      linha.classList.add("table-warning"); //adiciona a classe para a linha ficar amarela
-    } 
-      else{
-        linha.classList.remove("table-warning"); //remove a classe para voltar à cor original
-      }
-
+        //atualiza a cor da linha com base no custo
+        if(parseFloat(tarefaEditada.custo) > 1000){
+          linha.classList.add("table-warning");
+        } 
+          else {
+            linha.classList.remove("table-warning");
+          }
+        })
+      .catch((error) => {
+        console.error("Erro ao atualizar tarefa:", error);
+        alert("Não foi possível salvar a edição.");
+      });
   } 
     else{
-      //caso contrário, transforma as células em inputs para edição
-      celulas[0].innerHTML = `<input type="text" class="form-control" value="${celulas[0].textContent}">`; // Nome
-      celulas[1].innerHTML = `<input type="number" class="form-control" value="${celulas[1].textContent.replace('R$ ', '')}">`; // Custo
-      celulas[2].innerHTML = `<input type="date" class="form-control" value="${celulas[2].textContent}">`; // Data Limite
-      button.textContent = 'Salvar'; //muda o texto do botão para "Salvar"
-      linha.classList.add('editando'); //adiciona a classe 'editando'
-    }
+      celulas[0].innerHTML = `<input type="text" class="form-control" value="${celulas[0].textContent}">`;
+      celulas[1].innerHTML = `<input type="number" class="form-control" value="${celulas[1].textContent.replace('R$ ', '')}">`;
+      celulas[2].innerHTML = `<input type="date" class="form-control" value="${celulas[2].textContent}">`;
+
+    button.textContent = 'Salvar';
+    linha.classList.add('editando');
+  }
 }
 
 //métodos http
