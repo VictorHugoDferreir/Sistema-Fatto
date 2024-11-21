@@ -55,5 +55,32 @@ app.get('/tarefas', async (req, res) => {
   }
 });
 
+app.patch('/tarefas/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    const tarefaAtualizada = await prisma.task.update({
+      where: { id: Number(id) },
+      data: req.body,
+    });
+    res.status(200).json(tarefaAtualizada);
+  } catch (error) {
+    console.error('Erro ao atualizar tarefa:', error);
+    res.status(500).json({ error: 'Erro ao atualizar tarefa' });
+  }
+});
+
+app.delete('/tarefas/:id', async (req, res) => {
+  try {
+    const { id } = req.params;
+    await prisma.task.delete({ where: { id: Number(id) } });
+    res.status(204).send(); // Resposta sem conteúdo
+  } catch (error) {
+    console.error('Erro ao excluir tarefa:', error);
+    res.status(500).json({ error: 'Erro ao excluir tarefa' });
+  }
+});
+
+
+
 // Iniciar o servidor
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
