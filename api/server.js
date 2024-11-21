@@ -1,5 +1,6 @@
 import express from 'express'
 import path from 'path'
+import crypto from "crypto"
 
 const PORT = 5000;
 
@@ -22,7 +23,9 @@ app.get("/script.js", function(req,res){
 
 // Cadastrar uma nova tarefa
 app.post('/tarefas', (req, res) => {
-  
+  console.log(req.body);
+  req.body.id = crypto.randomUUID();
+  console.log(req.body);
   tasks.push(req.body);
 
   res.status(201).json(req.body);
