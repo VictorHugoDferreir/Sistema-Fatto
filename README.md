@@ -52,13 +52,13 @@ Abra um navegador e vá para: http://localhost:5000
 
 # Estrutura do Projeto
 
-sistema-de-tarefas/
-├── html/
-│   ├── index.html
-│   ├── style.css
-│   └── script.js
-├── server.js
-├── package.json
-├── prisma/
-│   └── schema.prisma
-└── README.md
+-sistema-de-tarefas/
+-├── html/
+-│   ├── index.html
+-│   ├── style.css
+-│   └── script.js
+-├── server.js
+-├── package.json
+-├── prisma/
+-│   └── schema.prisma
+-└── README.md
