@@ -59,6 +59,35 @@ node --watch server.js
 
 Abra um navegador e vá para: http://localhost:5000
 
-## Estrutura do Projeto:
+## Exemplo de Uso
 
+### Adicionando uma Tarefa
+- Preencha os campos "Tarefa", "Custo" e "Data Limite".
+- Clique no botão "Adicionar".
+- A tarefa será exibida na tabela.
+### Editando uma Tarefa
+- Clique no botão "Editar" ao lado da tarefa desejada.
+- Modifique os campos diretamente na tabela.
+- Clique em "Salvar" para confirmar.
+### Excluindo uma Tarefa
+- Clique no botão "Excluir" ao lado da tarefa desejada.
+- Confirme a exclusão na janela de diálogo.
 
+## Estrutura do Projeto
+
+```
+sistema-de-tarefas/
+├── api/                    # Diretório para as rotas e lógica do backend
+├── html/                   # Diretório contendo os arquivos do frontend
+│   ├── index.html          # Página principal do frontend
+│   ├── style.css           # Arquivo de estilo CSS
+│   └── script.js           # Lógica de interação do cliente
+├── node_modules/           # Dependências do projeto gerenciadas pelo Node.js
+├── prisma/
+│   └── schema.prisma       # Configuração do banco de dados MongoDB
+├── .gitignore              # Arquivo para ignorar arquivos/diretórios no Git
+├── package.json            # Arquivo de dependências do Node.js
+├── package-lock.json       # Arquivo de bloqueio de dependências do Node.js
+├── server.js               # Arquivo principal do backend
+└── README.md               # Documentação do projeto
+```
