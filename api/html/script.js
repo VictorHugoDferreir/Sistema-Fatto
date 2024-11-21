@@ -114,7 +114,7 @@ async function jsonReposta(resposta){
 }
 
 async function obterPost(id){
-  const resposta = await fetch('http://localhost:5000/tarefas'+id);
+  const resposta = await fetch('http://localhost:5000/tarefas/'+id);
   return await jsonReposta(resposta);
 }
 
@@ -130,11 +130,11 @@ async function incluirPost(data){
 }
 
 async function atualizarPost(data, id){
-  const resposta = await fetch('http://localhost:5000/tarefas'+id, {
+  const resposta = await fetch('http://localhost:5000/tarefas/'+id, {
     method: 'PATCH',
     body: JSON.stringify(data),
     headers: {
-        'Content-type': 'aplication/json;charset=utf-8'
+        'Content-type': 'application/json;charset=utf-8'
     }
   });
   return jsonReposta(resposta);
@@ -142,10 +142,10 @@ async function atualizarPost(data, id){
 }
 
 async function deletarPost(id){
-    const resposta = await fetch('http://localhost:5000/tarefas'+id, {
+    const resposta = await fetch('http://localhost:5000/tarefas/'+id, {
       method: 'DELETE',
       headers: {
-          'Content-type': 'aplication/json;charset=utf-8'
+          'Content-type': 'application/json;charset=utf-8'
       }
     });
     return jsonReposta(resposta);
