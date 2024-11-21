@@ -2,7 +2,7 @@ import express from 'express'
 import path from 'path'
 import { PrismaClient } from '@prisma/client'
 
-const prisma = new PrismaClient()
+const prisma = new PrismaClient();
 
 const PORT = 5000;
 
