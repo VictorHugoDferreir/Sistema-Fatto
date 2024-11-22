@@ -53,11 +53,13 @@ function excluirLinha(button) {
 
   let resposta = confirm("Você tem certeza que deseja excluir esta tarefa?");
   if(resposta){
-    //deletarPost(id).then(() => {
+    //deletarPost(id)
+    .then(() => {
       linha.remove(); // Remove a linha da tabela após exclusão no banco
       alert("Tarefa excluída!");
-    //}).catch((error) => {
-      //console.error("Erro ao excluir tarefa:", error);
+    //})
+    .catch((error) => {
+      console.error("Erro ao excluir tarefa:", error);
       alert("Não foi possível excluir a tarefa.");
     });
   } 
