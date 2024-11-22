@@ -13,9 +13,7 @@ async function adicionarLinha(){
     
       if(tarefa.nome && tarefa.custo && tarefa.dataLimite){
 
-        //let retorno = await incluirPost(tarefa);
-
-        //alert(retorno.id);
+        let retorno = await incluirPost(tarefa);
 
         const novaLinha = tabela.insertRow();
         //novaLinha.setAttribute('data-id', retorno.id);
