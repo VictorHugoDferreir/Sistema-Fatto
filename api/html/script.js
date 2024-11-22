@@ -8,10 +8,10 @@ const tarefa = {
 async function adicionarLinha(){
     const tabela = document.getElementById("TabelaDeTarefas").getElementsByTagName('tbody')[0];
     tarefa.nome = document.getElementById("nome").value;
-    tarefa.custo = document.getElementById("custo").value;
+    tarefa.custo = parseFloat(document.getElementById("custo").value);
     tarefa.dataLimite = document.getElementById("dataLimite").value;
     
-      if(tarefa.nome && tarefa.custo && tarefa.dataLimite){
+      if(tarefa.nome && !isNaN(tarefa.custo) && tarefa.dataLimite){
 
         //let retorno = await incluirPost(tarefa);
 
@@ -26,7 +26,7 @@ async function adicionarLinha(){
         const celulaEdit = novaLinha.insertCell(4);
   
         celulaNome.textContent = tarefa.nome;
-        celulaCusto.textContent = 'R$ ' + tarefa.custo;
+        celulaCusto.textContent = 'R$ ' + tarefa.custo.toFixed(2);
         celulaDataLimite.textContent = tarefa.dataLimite;
         celulaAcoes.innerHTML = '<button class="btn btn-danger" onclick="excluirLinha(this)">Excluir</button>';
         celulaEdit.innerHTML = '<button class="btn btn-primary" onclick="editarLinha(this)">Editar</button>';
@@ -78,7 +78,7 @@ function editarLinha(button){
   if(editando){
     const tarefaEditada = {
       nome: celulas[0].querySelector('input').value,
-      custo: celulas[1].querySelector('input').value,
+      custo: parseFloat(celulas[1].querySelector('input').value),
       dataLimite: celulas[2].querySelector('input').value
     };
 
