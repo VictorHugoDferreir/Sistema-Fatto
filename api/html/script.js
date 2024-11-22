@@ -18,7 +18,7 @@ async function adicionarLinha(){
         //alert(retorno.id);
 
         const novaLinha = tabela.insertRow();
-        novaLinha.setAttribute('data-id', retorno.id);
+        //novaLinha.setAttribute('data-id', retorno.id);
         const celulaNome = novaLinha.insertCell(0);
         const celulaCusto = novaLinha.insertCell(1);
         const celulaDataLimite = novaLinha.insertCell(2);
@@ -49,15 +49,15 @@ async function adicionarLinha(){
   
 function excluirLinha(button) {
   const linha = button.parentElement.parentElement; //pega a linha da tabela
-  const id = linha.getAttribute('data-id'); //pega o ID armazenado no atributo data-id
+ // const id = linha.getAttribute('data-id'); //pega o ID armazenado no atributo data-id
 
   let resposta = confirm("Você tem certeza que deseja excluir esta tarefa?");
   if(resposta){
-    deletarPost(id).then(() => {
+    //deletarPost(id).then(() => {
       linha.remove(); // Remove a linha da tabela após exclusão no banco
       alert("Tarefa excluída!");
-    }).catch((error) => {
-      console.error("Erro ao excluir tarefa:", error);
+    //}).catch((error) => {
+      //console.error("Erro ao excluir tarefa:", error);
       alert("Não foi possível excluir a tarefa.");
     });
   } 
@@ -80,8 +80,8 @@ function editarLinha(button){
       dataLimite: celulas[2].querySelector('input').value
     };
 
-    atualizarPost(tarefaEditada, id)
-      .then(() => {
+    //atualizarPost(tarefaEditada, id)
+      //.then(() => {
         celulas[0].textContent = tarefaEditada.nome;
         celulas[1].textContent = 'R$ ' + tarefaEditada.custo;
         celulas[2].textContent = tarefaEditada.dataLimite;
